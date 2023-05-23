@@ -1,0 +1,19 @@
+
+.button {
+    padding: 15px 20px;
+    &:hover {
+        cursor: pointer;
+    }
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.blue-button {
+    background-color: #6C77E5;
+    color: white;
+}
+.white-button {
+    background-color: #FDFDFF;
+    color: #C8D1D9;
+}

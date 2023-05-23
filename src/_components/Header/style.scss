@@ -1,0 +1,37 @@
+.header-wrapper {
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.services-counter {
+    padding: 5px 7px 4px;
+    position: relative;
+    bottom: 5px;
+    left: 5px;
+    background-color: #FFB739;
+    color: #ffffff;
+    border-radius: 40%;
+    font-size: 12px;
+}
+
+.control-buttons {
+    display: flex;
+
+
+    .control-button-item {
+        margin-right: 10px;
+    }
+    .zoom-menu-item {
+        margin-right: 3px;
+    }
+    .zoom-menu {
+        display: flex;
+    }
+    .scale {
+        padding: 17.5px;
+        background-color: #FDFDFF;
+        min-width: 75px;
+        width: 100%;
+    }
+}
