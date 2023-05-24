@@ -2,16 +2,17 @@ import React from 'react';
 import { BsFillCursorFill } from 'react-icons/bs';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
-import { ButtonComponent } from 'src/_components';
+import { Button, Select } from 'src/_components';
 import { zoom_sizes } from 'src/constants';
+import { ISelectOption } from 'src/interfaces';
 
 import './style.scss';
 
 interface HeaderProps {
 	setHorizontalMapCoordinate: (horizontalMapCoordinate: number) => void;
 	setVerticalMapCoordinate: (verticalMapCoordinate: number) => void;
-	setZoom: (zoom: number) => void;
-	zoom: number;
+	setZoom: (zoom: ISelectOption) => void;
+	zoom: ISelectOption;
 	setisDefaultPosition: (isDefaultPosition: boolean) => void;
 }
 
@@ -41,13 +42,8 @@ export const Header: React.FC<HeaderProps> = (props) => {
 				<span className='services-counter'>0</span>
 			</h1>
 			<div className='control-buttons'>
-				<ButtonComponent
-					name='LIST VIEW'
-					className='control-button-item'
-					color='blue'
-					onClick={() => {}}
-				/>
-				<ButtonComponent
+				<Button name='LIST VIEW' className='control-button-item' color='blue' onClick={() => {}} />
+				<Button
 					name={<BsFillCursorFill />}
 					className='control-button-item'
 					color='white'
@@ -58,15 +54,20 @@ export const Header: React.FC<HeaderProps> = (props) => {
 					}}
 				/>
 				<div className='zoom-menu'>
-					<ButtonComponent
+					<Button
 						name={<AiOutlineMinus />}
 						className='zoom-menu-item'
 						color='white'
 						disabled={zoom_sizes.indexOf(zoom) < 1}
 						onClick={handleZoomIn}
 					/>
-					<span className='scale zoom-menu-item'>{zoom}%</span>
-					<ButtonComponent
+					<Select
+						className='zoom-menu-item'
+						options={zoom_sizes}
+						selectedOption={zoom}
+						handleChange={setZoom}
+					/>
+					<Button
 						name={<AiOutlinePlus />}
 						className='zoom-menu-item'
 						color='white'

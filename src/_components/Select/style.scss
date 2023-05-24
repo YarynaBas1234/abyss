@@ -1,0 +1,94 @@
+@import 'src/scss/mixins';
+
+.select-backdrop {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 9;
+}
+
+.select-wrapper {
+	.select-label {
+		display: block;
+		margin-bottom: 4px;
+		font-weight: 600;
+		font-size: 16px;
+	}
+}
+
+.select {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+    padding: 17px;
+    background-color: #FDFDFF;
+    min-width: 75px;
+	&:hover {
+		cursor: pointer;
+	}
+
+	.selected-option {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		color: #C8D1D9;
+		padding-right: 16px;
+		position: relative;
+
+		span {
+			font-size: 16px;
+			@include text-ellipsis();
+		}
+	}
+
+	.options {
+		display: none;
+		margin-top: 2px;
+		padding: 4px 0;
+		max-height: 226px;
+		position: absolute;
+		left: -1px;
+		top: 100%;
+		width: 100%;
+		border-radius: 4px;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+		background-color: #ffffff;
+		overflow-y: auto;
+		overflow-x: hidden;
+		z-index: 10;
+		@include scroll-styled();
+	}
+
+	.open.options {
+		display: block;
+	}
+
+	.option {
+		display: flex;
+		align-items: center;
+		column-gap: 5px;
+		padding: 6px;
+		white-space: nowrap;
+		overflow: hidden;
+		transition: all ease 0.3s;
+
+		span {
+			display: block;
+			font-size: 16px;
+			@include text-ellipsis();
+		}
+
+		&:hover {
+			cursor: pointer;
+			color: #000000;
+			background-color: #d5d5d5;
+		}
+	}
+
+	.selected {
+		color: #6C77E5;
+	}
+}

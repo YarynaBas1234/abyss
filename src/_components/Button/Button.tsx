@@ -2,7 +2,7 @@ import React from 'react';
 
 import './style.scss';
 
-interface ButtonComponentProps {
+interface ButtonProps {
 	color?: 'blue' | 'white';
 	onClick?: () => void;
 	name: string | JSX.Element;
@@ -10,7 +10,7 @@ interface ButtonComponentProps {
 	disabled?: boolean;
 }
 
-export const ButtonComponent: React.FC<ButtonComponentProps> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
 	const { color, onClick, name, className, disabled } = props;
 
 	return (

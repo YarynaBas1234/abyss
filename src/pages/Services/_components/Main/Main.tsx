@@ -1,3 +1,6 @@
+import React from 'react';
+
+import { ISelectOption } from 'src/interfaces';
 import { SchemeWrapper } from '../Scheme';
 
 import './style.scss';
@@ -7,7 +10,7 @@ interface MainProps {
 	setHorizontalMapCoordinate: (horizontalIndent: number) => void;
 	verticalMapCoordinate: number;
 	setVerticalMapCoordinate: (verticalMapCoordinate: number) => void;
-	zoom: number;
+	zoom: ISelectOption;
 	isDefaultPosition: boolean;
 	setisDefaultPosition: (isDefaultPosition: boolean) => void;
 }

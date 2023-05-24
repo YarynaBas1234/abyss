@@ -1,19 +1,21 @@
-
 .button {
-    padding: 15px 20px;
-    &:hover {
-        cursor: pointer;
-    }
-    &:disabled {
-        cursor: not-allowed;
-    }
+	padding: 15px 20px;
+    transition: all ease 0.3s;
+	&:hover {
+		cursor: pointer;
+		color: #000000;
+		background-color: #d5d5d5;
+	}
+	&:disabled {
+		cursor: not-allowed;
+	}
 }
 
 .blue-button {
-    background-color: #6C77E5;
-    color: white;
+	background-color: #6c77e5;
+	color: #ffffff;
 }
 .white-button {
-    background-color: #FDFDFF;
-    color: #C8D1D9;
+	background-color: #fdfdff;
+	color: #c8d1d9;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from 'src/_components';
 import { Main } from './_components';
 import { zoom_sizes } from 'src/constants';
+import { ISelectOption } from 'src/interfaces';
 
 import '../../scss/index.scss';
 
@@ -9,7 +10,7 @@ export const Services = () => {
 	const [horizontalMapCoordinate, setHorizontalMapCoordinate] = React.useState<number>(0);
 	const [verticalMapCoordinate, setVerticalMapCoordinate] = React.useState<number>(0);
     const [isDefaultPosition, setisDefaultPosition] = React.useState(true);
-	const [zoom, setZoom] = React.useState<number>(zoom_sizes.find((size) => size === 100) || zoom_sizes[0]);
+	const [zoom, setZoom] = React.useState<ISelectOption>(zoom_sizes.find((size) => size.value === 100) || zoom_sizes[0]);
 
 
 	return (

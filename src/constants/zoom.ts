@@ -1,1 +1,15 @@
-export const zoom_sizes = [25, 30, 40, 50, 60, 70, 80, 90, 100, 125, 150];
+import { ISelectOption } from "src/interfaces";
+
+export const zoom_sizes: ISelectOption[] = [
+	{ value: 25, label: ' 25%' },
+	{ value: 30, label: ' 30%' },
+	{ value: 40, label: ' 40%' },
+	{ value: 50, label: ' 50%' },
+	{ value: 60, label: ' 60%' },
+	{ value: 70, label: ' 70%' },
+	{ value: 80, label: ' 80%' },
+	{ value: 90, label: ' 90%' },
+	{ value: 100, label: ' 100%' },
+	{ value: 125, label: ' 125%' },
+	{ value: 150, label: ' 150%' },
+];

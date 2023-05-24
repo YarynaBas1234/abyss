@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { AiFillPlusCircle } from 'react-icons/ai';
 import { IoIosArrowUp, IoIosArrowDown, IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
+import { categories } from 'src/store';
+import { ISelectOption } from 'src/interfaces';
+import { CategoriesTree } from '../CategoriesTree';
+
 import './style.scss';
-import { RoundIconButton } from 'src/_components';
 
 interface NavigationButtonProps {
 	arrowIcon: JSX.Element;
@@ -29,44 +31,12 @@ const NavigationButton: React.FC<NavigationButtonProps> = (props) => {
 	);
 };
 
-// interface SchemeProps {
-// 	isDefaultPosition
-// }
-
-// const Scheme: React.FC<SchemeProps> = (props) => {
-// 	const { 
-// 		isDefaultPosition,
-		
-// 	 } = props;
-
-// 	return (
-// 		<div
-// 			className={isDefaultPosition ? 'scheme default-category-position' : 'scheme'}
-// 			style={
-// 				!isDefaultPosition
-// 					? {
-// 							left: posX,
-// 							top: posY,
-// 							transform: `scale(${zoom / 100})`,
-// 					  }
-// 					: { transform: `scale(${zoom / 100})` }
-// 			}
-// 			onMouseDown={handleMouseDown}
-// 			onMouseUp={handleMouseUp}>
-// 			<div className='main-category-wrapper'>
-// 				<div className='category-name'>Categories</div>
-// 				<RoundIconButton icon={<AiFillPlusCircle className='menu-circle-icon' />} color='gray' />
-// 			</div>
-// 		</div>
-// 	);
-// };
-
 interface SchemeWrapperProps {
 	horizontalMapCoordinate: number;
 	setHorizontalMapCoordinate: (horizontalMapCoordinate: number) => void;
 	verticalMapCoordinate: number;
 	setVerticalMapCoordinate: (verticalMapCoordinate: number) => void;
-	zoom: number;
+	zoom: ISelectOption;
 	isDefaultPosition: boolean;
 	setisDefaultPosition: (isDefaultPosition: boolean) => void;
 }
@@ -87,13 +57,14 @@ export const SchemeWrapper: React.FC<SchemeWrapperProps> = (props) => {
 	const [currentX, setCurrentX] = React.useState(0);
 	const [currentY, setCurrentY] = React.useState(0);
 	const [dragging, setDragging] = React.useState(false);
+	const [isActiveAction, setIsActiveAction] = React.useState(false);
 
 	const stepIndent = 5;
 
-	const handleMouseDown = (event: any) => {
+	const handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
 		setDragging(true);
-		const rect = event.target.getBoundingClientRect();
-		const x = event.clientX - rect.left; //x position within the element.
+		const rect = event.currentTarget.getBoundingClientRect();
+		const x = event.clientX - rect.left;
 		const y = event.clientY - rect.top;
 
 		setCurrentX(x);
@@ -101,10 +72,10 @@ export const SchemeWrapper: React.FC<SchemeWrapperProps> = (props) => {
 	};
 
 	const handleMouseMove = (event: any) => {
-		const x = event.clientX - currentX;
-		const y = event.clientY - 161 - currentY;
+		if (dragging && !isActiveAction) {
+			const x = event.clientX - currentX;
+			const y = event.clientY - 161 - currentY;
 
-		if (dragging) {
 			setPosX(x);
 			setPosY(y);
 			setisDefaultPosition(false);
@@ -112,7 +83,12 @@ export const SchemeWrapper: React.FC<SchemeWrapperProps> = (props) => {
 	};
 
 	const handleMouseUp = () => {
+		setIsActiveAction(false);
 		setDragging(false);
+	};
+
+	const onActionStart = () => {
+		setIsActiveAction(true);
 	};
 
 	return (
@@ -158,9 +134,6 @@ export const SchemeWrapper: React.FC<SchemeWrapperProps> = (props) => {
 			<div
 				className='zoom-area'
 				style={{ left: horizontalMapCoordinate, top: verticalMapCoordinate }}>
-					{/* <Scheme 
-					isDefaultPosition={isDefaultPosition}
-					/> */}
 				<div
 					className={isDefaultPosition ? 'scheme default-category-position' : 'scheme'}
 					style={
@@ -168,19 +141,13 @@ export const SchemeWrapper: React.FC<SchemeWrapperProps> = (props) => {
 							? {
 									left: posX,
 									top: posY,
-									transform: `scale(${zoom / 100})`,
+									transform: `scale(${zoom.value / 100})`,
 							  }
-							: { transform: `scale(${zoom / 100})` }
+							: { transform: `scale(${zoom.value / 100})` }
 					}
 					onMouseDown={handleMouseDown}
 					onMouseUp={handleMouseUp}>
-					<div className='main-category-wrapper'>
-						<div className='category-name'>Categories</div>
-						<RoundIconButton
-							icon={<AiFillPlusCircle className='menu-circle-icon' />}
-							color='gray'
-						/>
-					</div>
+					<CategoriesTree categories={categories} onActionStart={onActionStart} />
 				</div>
 			</div>
 		</div>
